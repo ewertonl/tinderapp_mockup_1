@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   final double _gap = 10;
   @override
   Widget build(BuildContext context) {
+    final Size wsize = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -42,57 +43,66 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Center(
             child: SizedBox(
-              width: 340,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: _gap * 10),
-                    child: Image.asset(
-                      height: 48,
-                      "assets/logo_tinder.png",
-                      color: AppColors.white,
+              width: 360,
+              child: AnimatedAlign(
+                duration: const Duration(milliseconds: 300),
+                alignment: wsize.width > wsize.height ? Alignment.center : Alignment.bottomCenter,
+                curve: Curves.ease,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  //mainAxisAlignment: wsize.width > wsize.height
+                  //? MainAxisAlignment.center
+                  //: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: _gap * 10),
+                      child: Image.asset(
+                        height: 48,
+                        "assets/logo_tinder.png",
+                        color: AppColors.white,
+                      ),
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(20),
-                    child: AppDisclaimer(),
-                  ),
-                  SizedBox(height: _gap),
-                  Button(
-                    label: "Sign in with Apple".toUpperCase(),
-                    icon: Image.asset(
-                      "assets/logo_apple.png",
-                      height: 16,
+                    const Padding(
+                      padding: EdgeInsets.all(20),
+                      child: AppDisclaimer(),
                     ),
-                  ),
-                  SizedBox(height: _gap),
-                  Button(
-                    label: "Sign in with Facebook".toUpperCase(),
-                    icon: Image.asset(
-                      "assets/logo_facebook.png",
-                      height: 16,
+                    SizedBox(height: _gap),
+                    Button(
+                      label: "Sign in with Apple".toUpperCase(),
+                      icon: Image.asset(
+                        "assets/logo_apple.png",
+                        height: 16,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: _gap),
-                  Button(
-                    label: "Sign in with Phone Number".toUpperCase(),
-                    icon: Image.asset(
-                      "assets/bubble.png",
-                      height: 16,
+                    SizedBox(height: _gap),
+                    Button(
+                      label: "Sign in with Facebook".toUpperCase(),
+                      icon: Image.asset(
+                        "assets/logo_facebook.png",
+                        height: 16,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: _gap),
-                  TextButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(AppColors.white),
+                    SizedBox(height: _gap),
+                    Button(
+                      label: "Sign in with Phone Number".toUpperCase(),
+                      icon: Image.asset(
+                        "assets/bubble.png",
+                        height: 16,
+                      ),
                     ),
-                    child: const Text("Trouble Signing In?"),
-                  ),
-                  SizedBox(height: _gap * 2),
-                ],
+                    SizedBox(height: _gap),
+                    SizedBox(height: _gap),
+                    TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(AppColors.white),
+                      ),
+                      child: const Text("Trouble Signing In?"),
+                    ),
+                    SizedBox(height: _gap * 2),
+                  ],
+                ),
               ),
             ),
           ),
